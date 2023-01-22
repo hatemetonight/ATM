@@ -1,0 +1,58 @@
+@startuml
+
+
+class ATM {
+  + ATM(): 
+  + menuPrompt(Bank, Scanner): User
+  + showAccountTransactionHistory(User, Scanner): void
+  + printUserMenu(User, Scanner): void
+  + depositeFunds(User, Scanner): void
+  + main(String[]): void
+  + withdrawFunds(User, Scanner): void
+  + transferFunds(User, Scanner): void
+}
+class Account {
+  + Account(String, User, Bank): 
+  + addTransaction(double, String): void
+  + showTransactions(): void
+   UUID: String
+   balance: double
+   summaryLine: String
+}
+class Bank {
+  + Bank(String): 
+  - name: String
+  + addUser(String, String, String): User
+  + addAccount(Account): void
+  + userLogin(String, String): User
+   name: String
+   newAccountUUID: String
+   newUserUUID: String
+}
+class Transaction {
+  + Transaction(double, String, Account): 
+  + Transaction(double, Account): 
+  + transactionInfo(): void
+   money: double
+}
+class User {
+  + User(String, String, String, Bank): 
+  - firstName: String
+  + numAccounts(): int
+  + printAcctTransHistory(int): void
+  + validatePin(String): boolean
+  + addAccount(Account): void
+  + printAccountsSummary(): void
+  + getAcctUUID(int): String
+  + getAcctBalance(int): double
+  + addAcctTransaction(int, double, String): void
+   UUID: String
+   firstName: String
+}
+
+Account     "1" *-[#595959,plain]-> "transactions\n*" Transaction 
+Bank        "1" *-[#595959,plain]-> "accounts\n*" Account     
+Bank        "1" *-[#595959,plain]-> "users\n*" User        
+Transaction "1" *-[#595959,plain]-> "inAccount\n1" Account     
+User        "1" *-[#595959,plain]-> "accounts\n*" Account     
+@enduml
