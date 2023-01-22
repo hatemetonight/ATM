@@ -1,0 +1,41 @@
+@startuml
+class Detail {
+    - Double size
+    - Double weight
+    - String material
+    - String name
+    + String getName()
+    + void setName()
+    + breakDown()
+    + abstract Boolean isWorkable()
+
+}
+class  Mechanism {
+    - isAutomatic
+    - detailCount
+    + abstract Boolean isWorkable()
+
+    
+}
+abstract class Product {
+    - String name
+    - String type
+    + String getName()
+    + void setName()
+    + abstract Boolean isWorkable()
+    
+}
+class  Node {
+    - parts
+    - String name
+    +connect()
+}
+
+
+Detail --|> Node
+Node --|> Mechanism
+Mechanism --|> Product
+
+
+
+@enduml
